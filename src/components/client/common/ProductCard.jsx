@@ -3,10 +3,9 @@ import ProductContext from "../../../context/product-context/ProductContext";
 
 function ProductCard() {
   const products = useContext(ProductContext);
-  console.log("products:", products);
 
   return (
-    <div className="flex flex-wrap gap-6 justify-evenly py-10">
+    <>
       {products?.map((product, index) => (
         <div
           key={index}
@@ -16,7 +15,7 @@ function ProductCard() {
             <a href="#">
               <img
                 className="mx-auto h-full dark:hidden"
-                src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front.svg"
+                src={product.thumbnail}
                 alt=""
               />
               <img
@@ -29,7 +28,7 @@ function ProductCard() {
           <div className="pt-6">
             <div className="mb-4 flex items-center justify-between gap-4">
               <span className="me-2 rounded bg-primary-100 px-2.5 py-0.5 text-xs font-medium text-primary-800 dark:bg-primary-900 dark:text-primary-300">
-                Up to 35% off
+                Up to {product.discountPercentage}% off
               </span>
 
               <div className="flex items-center justify-end gap-1">
@@ -108,7 +107,7 @@ function ProductCard() {
               href="#"
               className="text-lg font-semibold leading-tight text-gray-900 hover:underline dark:text-white"
             >
-              Apple iMac 27", 1TB HDD, Retina 5K Display, M3 Max
+              {product.title}
             </a>
 
             <div className="mt-2 flex items-center gap-2">
@@ -164,25 +163,25 @@ function ProductCard() {
                 </svg>
               </div>
               <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                4.95
+                {product.rating}
               </span>
             </div>
 
             <div className="my-4 flex items-center justify-between gap-4">
               <span className="text-2xl font-bold text-gray-900 dark:text-white">
-                $2999
+                ${product.price}
               </span>
               <a
                 href="#"
                 className="inline-flex items-center rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900"
               >
-                Buy now
+                Add to Cart
               </a>
             </div>
           </div>
         </div>
       ))}
-    </div>
+    </>
   );
 }
 

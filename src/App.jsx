@@ -4,15 +4,18 @@ import "./styles.css";
 import UserRouter from "./routes/UserRouter";
 
 import { ProductDataProvider } from "./context/product-context/ProductContext/";
+import { UserDataProvider } from "./context/user-context/UserContext/";
 
 export default function App() {
   return (
-    <ProductDataProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/*" element={<UserRouter />}></Route>
-        </Routes>
-      </BrowserRouter>
-    </ProductDataProvider>
+    <BrowserRouter>
+      <UserDataProvider>
+        <ProductDataProvider>
+          <Routes>
+            <Route  path="/*" element={<UserRouter />}></Route>
+          </Routes>
+        </ProductDataProvider>
+      </UserDataProvider>
+    </BrowserRouter>
   );
 }

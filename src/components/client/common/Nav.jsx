@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 ("use client");
 
 import { Avatar, Button, Dropdown, Navbar } from "flowbite-react";
 import { useNavigate } from "react-router-dom";
+import UserContext from "../../../context/user-context/UserContext";
 
 function Nav() {
+  const { userDetails, signOut } = useContext(UserContext);
   const navigate = useNavigate();
   return (
     <Navbar className="bg-blue-500 rounded-[0px]" fluid rounded>
@@ -18,37 +20,76 @@ function Nav() {
           e-shop
         </span>
       </Navbar.Brand>
-      <div className="flex items-center  md:order-2 ">
-        <Button
-          onClick={() => navigate("login")}
-          className="bg-white text-black"
-          size="sm"
+      <div className="flex items-center  md:order-2 gap-5 ">
+        <button
+          type="button"
+          class="text-white   font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center  dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
-          Log in
-        </Button>
-        {/* <Dropdown
-          arrowIcon={false}
-          inline
-          label={
-            <Avatar
-              alt="User settings"
-              img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-              rounded
+          <svg
+            class="w-6 h-6 text-white"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+              d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312"
             />
-          }
-        >
-          <Dropdown.Header>
-            <span className="block text-sm">Bonnie Green</span>
-            <span className="block truncate text-sm font-medium">
-              name@flowbite.com
-            </span>
-          </Dropdown.Header>
-          <Dropdown.Item>Dashboard</Dropdown.Item>
-          <Dropdown.Item>Settings</Dropdown.Item>
-          <Dropdown.Item>Earnings</Dropdown.Item>
-          <Dropdown.Divider />
-          <Dropdown.Item>Sign out</Dropdown.Item>
-        </Dropdown> */}
+          </svg>
+        </button>
+        {userDetails.accessToken === null ? (
+          <button
+            onClick={() => navigate("login")}
+            type="button"
+            class="bg-white text-blue-700 hover:bg-blue-800 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 "
+          >
+            Log in
+            <svg
+              class="w-3.5 h-3.5 ms-2"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 12H5m14 0-4 4m4-4-4-4"
+              />
+            </svg>
+          </button>
+        ) : (
+          <Dropdown
+            arrowIcon={false}
+            inline
+            label={
+              <Avatar alt="User settings" img={userDetails.image} rounded />
+            }
+          >
+            <Dropdown.Header>
+              <span className="block text-sm">{userDetails.userName}</span>
+              <span className="block truncate text-sm font-medium">
+                {userDetails.email}
+              </span>
+            </Dropdown.Header>
+            <Dropdown.Item>Dashboard</Dropdown.Item>
+            <Dropdown.Item>Settings</Dropdown.Item>
+            <Dropdown.Item>Earnings</Dropdown.Item>
+            <Dropdown.Divider />
+            <Dropdown.Item onClick={() => signOut()}>Sign out</Dropdown.Item>
+          </Dropdown>
+        )}
+
         <Navbar.Toggle />
       </div>
       <Navbar.Collapse>

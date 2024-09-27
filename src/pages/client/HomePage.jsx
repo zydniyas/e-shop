@@ -8,7 +8,7 @@ function HomePage() {
     <div>
       <Nav />
       <Banner />
-      <div className="">
+      <div className="grid grid-cols-4 gap-5 p-5 py-20 max-w-max mx-auto">
         <ProductCard />
       </div>
     </div>

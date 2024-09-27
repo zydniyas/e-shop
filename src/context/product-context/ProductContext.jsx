@@ -15,7 +15,7 @@ export const ProductDataProvider = ({ children }) => {
       .catch((err) => {
         setError(err.message);
       });
-  }, []);
+  }, [products]);
 
   return (
     <ProductContext.Provider value={products}>
