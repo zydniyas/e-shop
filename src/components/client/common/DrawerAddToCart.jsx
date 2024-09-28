@@ -6,12 +6,18 @@ import CartContext from "../../../context/cart-context/CartContext";
 import { HiShoppingCart } from "react-icons/hi";
 
 export function DrawerAddToCart() {
-  const { isOpen, setIsOpen, handleClose, cart } = useContext(CartContext);
+  const { isOpen, setIsOpen, handleClose, cart, removeFromCart, totalPrice } =
+    useContext(CartContext);
   console.log("cart:", cart);
 
   return (
     <>
-      <Drawer className="w-3/12" open={isOpen} onClose={handleClose} position="right">
+      <Drawer
+        className="w-3/12"
+        open={isOpen}
+        onClose={handleClose}
+        position="right"
+      >
         <Drawer.Header titleIcon={HiShoppingCart} title="Your Cart" />
         <Drawer.Items>
           {/* Cart Item 1*/}
@@ -55,9 +61,7 @@ export function DrawerAddToCart() {
               {/* Remove Button */}
               <button
                 className="text-sm text-red-500 hover:underline"
-                onClick={() => {
-                  /* Remove item from cart */
-                }}
+                onClick={() => removeFromCart(item.id)}
               >
                 Remove
               </button>
@@ -68,7 +72,9 @@ export function DrawerAddToCart() {
           <div className="mt-6 border-t pt-4">
             <div className="flex justify-between">
               <span className="text-lg font-medium text-gray-900">Total</span>
-              <span className="text-lg font-medium text-gray-900">$65.00</span>
+              <span className="text-lg font-medium text-gray-900">
+                ${totalPrice}
+              </span>
             </div>
             <p className="mt-1 text-sm text-gray-500">
               Shipping and taxes calculated at checkout.

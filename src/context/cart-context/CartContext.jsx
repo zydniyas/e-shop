@@ -11,13 +11,28 @@ export const CartDataProvider = ({ children }) => {
     setCart((prevArray) => [...prevArray, product]);
   };
 
+  const removeFromCart = (productId) => {
+    setCart((prevArray) => prevArray.filter((item) => item.id !== productId));
+  };
+
+  const totalPrice = cart.reduce((total, item) => total + item.price, 0);
+
   useEffect(() => {
     console.log(cart);
   }, [cart]);
 
   return (
     <CartContext.Provider
-      value={{ cart, setCart, addToCart, isOpen, setIsOpen, handleClose }}
+      value={{
+        cart,
+        setCart,
+        addToCart,
+        isOpen,
+        setIsOpen,
+        handleClose,
+        removeFromCart,
+        totalPrice
+      }}
     >
       {children}
     </CartContext.Provider>
