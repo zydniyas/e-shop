@@ -1,8 +1,12 @@
 import React, { Fragment, useContext } from "react";
 import ProductContext from "../../../context/product-context/ProductContext";
+import CartContext from "../../../context/cart-context/CartContext";
+import { Button } from "flowbite-react";
 
 function ProductCard() {
   const products = useContext(ProductContext);
+  const { cart, setCart, addToCart } = useContext(CartContext);
+  const { setIsOpen } = useContext(CartContext);
 
   return (
     <>
@@ -171,12 +175,16 @@ function ProductCard() {
               <span className="text-2xl font-bold text-gray-900 dark:text-white">
                 ${product.price}
               </span>
-              <a
-                href="#"
+              <button
+                onClick={() => {
+                  setIsOpen(true), addToCart(product);
+                }}
+                // onClick={() => addToCart(product)}
                 className="inline-flex items-center rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900"
               >
                 Add to Cart
-              </a>
+              </button>
+              {/* <Button>Show right drawer</Button> */}
             </div>
           </div>
         </div>
