@@ -9,7 +9,7 @@ function Nav() {
   const { userDetails, signOut } = useContext(UserContext);
   const navigate = useNavigate();
   return (
-    <Navbar className="bg-blue-500 rounded-[0px]" fluid rounded>
+    <Navbar className="bg-blue-500 rounded-[0px] " fluid rounded>
       <Navbar.Brand href="/">
         <img
           src="https://www.shutterstock.com/image-vector/letter-e-online-shop-logo-260nw-1540000625.jpg"

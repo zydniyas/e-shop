@@ -31,7 +31,7 @@ export const CartDataProvider = ({ children }) => {
         setIsOpen,
         handleClose,
         removeFromCart,
-        totalPrice
+        totalPrice,
       }}
     >
       {children}

@@ -5,7 +5,7 @@ import { Button } from "flowbite-react";
 
 function ProductCard() {
   const products = useContext(ProductContext);
-  const { cart, setCart, addToCart, } = useContext(CartContext);
+  const { cart, setCart, addToCart } = useContext(CartContext);
   const { setIsOpen } = useContext(CartContext);
   // const isInCart = cart.some(item => item.id === product.id);
 
@@ -189,7 +189,7 @@ function ProductCard() {
               ) : (
                 <button
                   onClick={() => {
-                    setIsOpen(true), addToCart(product);
+                    addToCart(product);
                   }}
                   className="inline-flex items-center rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900"
                 >
