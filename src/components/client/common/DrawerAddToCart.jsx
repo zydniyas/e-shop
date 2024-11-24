@@ -4,10 +4,19 @@ import { Button, Drawer } from "flowbite-react";
 import { useContext } from "react";
 import CartContext from "../../../context/cart-context/CartContext";
 import { HiShoppingCart } from "react-icons/hi";
+import CheckoutForm from "../checkout/CheckoutForm";
 
 export function DrawerAddToCart() {
-  const { isOpen, setIsOpen, handleClose, cart, removeFromCart, totalPrice } =
-    useContext(CartContext);
+  const {
+    isOpen,
+    setIsOpen,
+    handleClose,
+    cart,
+    removeFromCart,
+    totalPrice,
+    setCheckout,
+    checkout,
+  } = useContext(CartContext);
   console.log("cart:", cart);
 
   return (
@@ -19,11 +28,14 @@ export function DrawerAddToCart() {
         position="right"
       >
         <Drawer.Header titleIcon={HiShoppingCart} title="Your Cart" />
-        {cart?.length > 0 ? (
+        {cart?.length > 0 && checkout === false ? (
           <Drawer.Items>
             {/* Cart Item 1*/}
             {cart?.map((item, index) => (
-              <div key={index} className="mb-4 flex items-center justify-between border-b pb-4">
+              <div
+                key={index}
+                className="mb-4 flex items-center justify-between border-b pb-4"
+              >
                 <div className="flex items-center">
                   {/* Product Image */}
                   <img
@@ -72,7 +84,7 @@ export function DrawerAddToCart() {
             ))}
 
             {/* Cart Summary */}
-            <div className="mt-6 border-t pt-4"> 
+            <div className="mt-6 border-t pt-4">
               <div className="flex justify-between">
                 <span className="text-lg font-medium text-gray-900">Total</span>
                 <span className="text-lg font-medium text-gray-900">
@@ -83,17 +95,22 @@ export function DrawerAddToCart() {
                 Shipping and taxes calculated at checkout.
               </p>
               {/* Checkout Button */}
-              <button className="mt-4 w-full rounded bg-cyan-600 px-4 py-2 text-center text-white hover:bg-cyan-700">
+              <button
+                onClick={() => setCheckout(true)}
+                className="mt-4 w-full rounded bg-cyan-600 px-4 py-2 text-center text-white hover:bg-cyan-700"
+              >
                 Proceed to Checkout
               </button>
             </div>
           </Drawer.Items>
-        ) : (
+        ) : cart?.length === 0 && checkout === false ? (
           <Drawer.Items>
             <div className="mt-6 border-t pt-4 text-center">
               <p className="mt-1 text-sm text-gray-500">Your Cart is Empty!.</p>
             </div>
           </Drawer.Items>
+        ) : (
+          <CheckoutForm />
         )}
       </Drawer>
     </>

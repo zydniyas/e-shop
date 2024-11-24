@@ -5,6 +5,7 @@ const CartContext = createContext({});
 export const CartDataProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [checkout, setCheckout] = useState(false);
   const handleClose = () => setIsOpen(false);
 
   const addToCart = (product) => {
@@ -32,6 +33,8 @@ export const CartDataProvider = ({ children }) => {
         handleClose,
         removeFromCart,
         totalPrice,
+        setCheckout,
+        checkout,
       }}
     >
       {children}
