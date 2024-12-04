@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CartContext from "../../../context/cart-context/CartContext";
+import { showToast } from "../common/ToastProvider";
 
 function CheckoutForm() {
   // State for user inputs
@@ -29,6 +30,7 @@ function CheckoutForm() {
         setCart([]),
         setCheckout(false),
         setIsOpen(false),
+        showToast("success", "Order Placed successfully"),
         navigate("/")
       );
     }, 2000); // Mock 2-second payment processing delay

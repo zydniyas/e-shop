@@ -5,6 +5,8 @@ import { useContext } from "react";
 import CartContext from "../../../context/cart-context/CartContext";
 import { HiShoppingCart } from "react-icons/hi";
 import CheckoutForm from "../checkout/CheckoutForm";
+import UserContext from "../../../context/user-context/UserContext";
+import { showToast } from "./ToastProvider";
 
 export function DrawerAddToCart() {
   const {
@@ -17,12 +19,14 @@ export function DrawerAddToCart() {
     setCheckout,
     checkout,
   } = useContext(CartContext);
+
+  const { userDetails } = useContext(UserContext);
   console.log("cart:", cart);
 
   return (
     <>
       <Drawer
-        className="w-3/12"
+        className="w-3/12 z-40"
         open={isOpen}
         onClose={handleClose}
         position="right"
@@ -96,7 +100,11 @@ export function DrawerAddToCart() {
               </p>
               {/* Checkout Button */}
               <button
-                onClick={() => setCheckout(true)}
+                onClick={() =>
+                  userDetails.accessToken != null
+                    ? setCheckout(true)
+                    : showToast("error", "Please login to purchase")
+                }
                 className="mt-4 w-full rounded bg-cyan-600 px-4 py-2 text-center text-white hover:bg-cyan-700"
               >
                 Proceed to Checkout

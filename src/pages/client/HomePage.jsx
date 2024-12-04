@@ -8,19 +8,19 @@ import { Footers } from "../../components/client/common/Footers";
 import ProductGallary from "../../components/client/home/ProductGallary";
 
 function HomePage() {
-    const { cart, setCart } = useContext(CartContext);
-    console.log(cart);
+  const { cart, setCart } = useContext(CartContext);
+  console.log(cart);
 
-    return (
-        <div>
-            <Nav />
-            <DrawerAddToCart />
-            <Banner />
-            <ProductCard />
-            <ProductGallary />
-            <Footers />
-        </div>
-    );
+  return (
+    <div>
+      <Nav />
+      <DrawerAddToCart />
+      <Banner />
+      <ProductCard />
+      <ProductGallary />
+      <Footers />
+    </div>
+  );
 }
 
 export default HomePage;
