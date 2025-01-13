@@ -55,7 +55,7 @@ function Nav() {
         </button>
         {userDetails.accessToken === null ? (
           <button
-            onClick={() => navigate("login")}
+            onClick={() => navigate("/login")}
             type="button"
             className="bg-white text-blue-700 hover:bg-blue-800 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 "
           >
@@ -92,7 +92,9 @@ function Nav() {
                 {userDetails.email}
               </span>
             </Dropdown.Header>
-            <Dropdown.Item>Dashboard</Dropdown.Item>
+            <Dropdown.Item onClick={() => navigate("profile")}>
+              Dashboard
+            </Dropdown.Item>
             <Dropdown.Item>Settings</Dropdown.Item>
             <Dropdown.Item>Earnings</Dropdown.Item>
             <Dropdown.Divider />
